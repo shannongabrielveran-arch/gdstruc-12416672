@@ -1,35 +1,73 @@
+
+
+import java.util.LinkedList;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        PlayerLinkedList playerList = new PlayerLinkedList();
+        LinkedList<Player> playerList = new LinkedList<>();
+        int size = 0; // in-place counter
 
-        // add players (equivalent to ArrayList version)
-        playerList.add(new Player(1, 200, "Lotus"));
-        playerList.add(new Player(2, 100, "Tenno"));
-        playerList.add(new Player(3, 50, "TeshinDax"));
+        // Add elements
+        playerList.add(new Player(1, 100, "Blair"));
+        playerList.add(new Player(2, 205, "ZXen0on"));
+        playerList.add(new Player(3, 34, "Yukio"));
+        size = playerList.size();
 
-        // get element at index 1
-        System.out.println("playerList.get(1): " + playerList.get(1));
+        System.out.println("Initial list:");
+        printList(playerList);
 
-        // insert at specific index (index 2)
-        playerList.add(2, new Player(10, 750, "Rhino"));
+        // Remove first element
+        removeFirst(playerList);
+        size = playerList.size();
 
-        // remove at specific index (index 2)
-        playerList.remove(2);
+        System.out.println("\nAfter removing first element:");
+        printList(playerList);
+        System.out.println("Current size: " + size);
 
-        // contains() and indexOf()
-        System.out.println("Contains Tenno? " +
-                playerList.contains(new Player(2, 100, "Tenno")));
-        System.out.println("Index of TeshinDax: " +
-                playerList.indexOf(new Player(3, 50, "TeshinDax")));
+        // Check contains()
+        System.out.println("\nContains LethaBacon (id=2)? " +
+                contains(playerList, new Player(2, 205, "LethaBacon")));
 
-        // demonstrate removeFirst()
-        System.out.println("\nRemoving first element: " + playerList.removeFirst());
-        System.out.println("Current size: " + playerList.getSize());
+        // Check indexOf()
+        System.out.println("Index of HPDeskjet: " +
+                indexOf(playerList, new Player(3, 34, "HPDeskjet")));
+    }
 
-        // print remaining players using our own traversal
-        System.out.println("\nPlayers in list:");
-        playerList.printList();
+    // Removes the first element of the LinkedList
+    public static void removeFirst(LinkedList<Player> list) {
+        if (!list.isEmpty()) {
+            list.removeFirst();
+        } else {
+            System.out.println("List is already empty.");
+        }
+    }
+
+    // Checks if LinkedList contains a specific player
+    public static boolean contains(LinkedList<Player> list, Player player) {
+        for (Player p : list) {
+            if (p.equals(player)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Finds the index of a specific player in LinkedList
+    public static int indexOf(LinkedList<Player> list, Player player) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).equals(player)) {
+                return i;
+            }
+        }
+        return -1; // not found
+    }
+
+    // Helper method to print the list
+    public static void printList(LinkedList<Player> list) {
+        for (Player p : list) {
+            System.out.println(p);
+        }
     }
 }

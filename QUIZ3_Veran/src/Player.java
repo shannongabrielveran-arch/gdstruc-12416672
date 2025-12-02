@@ -1,4 +1,3 @@
-
 import java.util.Objects;
 
 public class Player {
@@ -47,12 +46,9 @@ public class Player {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Player player = (Player) o;
-        return id == player.id &&
-                level == player.level &&
-                Objects.equals(name, player.name);
+        return id == player.id && level == player.level && Objects.equals(name, player.name);
     }
 
     @Override
@@ -60,4 +56,3 @@ public class Player {
         return Objects.hash(id, name, level);
     }
 }
-
